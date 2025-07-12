@@ -4,8 +4,63 @@ Changelog
 ==========
 
 .. changelog::
-    :version: 1.16.3
+    :version: 1.16.5
     :include_notes_from: unreleased
+
+.. changelog::
+    :version: 1.16.4
+    :released: July 10, 2025
+
+    .. change::
+        :tags: bug, config
+        :tickets: 1694
+
+        Fixed issue in new ``pyproject.toml`` support where boolean values, such as
+        those used for the ``recursive_version_locations`` and ``sourceless``
+        configuration parameters, would not be accepted.
+
+
+.. changelog::
+    :version: 1.16.3
+    :released: July 8, 2025
+
+    .. change::
+        :tags: bug, autogenerate
+        :tickets: 1633
+
+        Fixed the rendering of ``server_default=FetchedValue()`` to ensure it is
+        preceded by the ``sa.`` prefix in the migration script. Pull request
+        courtesy david-fed.
+
+    .. change::
+        :tags: usecase, commands
+        :tickets: 1683
+
+        Added new ``pyproject_async`` template, combining the new ``pyproject``
+        template with the ``async`` template.  Pull request courtesy Alc-Alc.
+
+    .. change::
+        :tags: usecase, autogenerate
+        :tickets: 1686
+
+        Add "module" post-write hook. This hook type is almost identical to the
+        console_scripts hook, except it's running ``python -m black`` instead of
+        using black's ``console_script``. It is mainly useful for tools without
+        console scripts (e.g. ruff), but has semantics closer to the
+        console_scripts hook in that it finds the ruff module available to the
+        running interpreter instead of finding an executable by path. Pull request
+        courtesy Frazer McLean.
+
+    .. change::
+        :tags: bug, autogenerate
+        :tickets: 1692
+
+        Fixed autogenerate rendering bug which failed to render foreign key
+        constraints local to a :class:`.CreateTableOp` object if it did not refer
+        to a ``MetaData`` collection via a private constructor argument that would
+        not ordinarily be passed in user-defined rewriter recipes, including ones
+        in the Alembic cookbook section of the docs.
+
 
 .. changelog::
     :version: 1.16.2
